@@ -35,7 +35,7 @@ runs:
     - name: 🦜 Checkout Scripts
       uses: actions/checkout@v3
       with:
-        repository: 'spicyparrot/scan-images'
+        repository: 'OligoCyberSecurity/scan-images'
         path: temp_scanning
         ref: 'trunk'
 
