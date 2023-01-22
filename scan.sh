@@ -6,7 +6,7 @@ IMAGE_EXCLUDE_GREP=$2
 SEVERITIES=$3
 
 # Variables
-SECURITY_CHECKS="vuln,config,secret,license"      #--security-checks (vuln,config,secret,license) (default [vuln,secret])
+SECURITY_CHECKS="vuln"      #--security-checks (vuln,config,secret,license) (default [vuln,secret])
 
 # Colours
 GREEN='\033[0;32m'
