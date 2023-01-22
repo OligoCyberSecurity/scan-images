@@ -6,7 +6,7 @@ IMAGE_EXCLUDE_GREP=$2
 SEVERITIES=$3
 
 # Variables
-SECURITY_CHECKS="vuln"      #--security-checks (vuln,config,secret,license) (default [vuln,secret])
+SECURITY_CHECKS="vuln,config,secret,license"      #--security-checks (vuln,config,secret,license) (default [vuln,secret])
 
 # Colours
 GREEN='\033[0;32m'
@@ -27,8 +27,8 @@ TOTAL_FILE=/tmp/totals
 # Grep For Images
 ALL_IMAGES=$(docker image list --format "{{.Repository}}:{{.Tag}}")
 IMAGES=$(docker image list --format "{{.Repository}}:{{.Tag}}"|grep ${IMAGE_GREP}|grep -v ${IMAGE_EXCLUDE_GREP})
-printf "All images:\n${PURPLE}$ALL_IMAGES\n${WHITE}"
 printf "Image grep:\n${YELLOW}$IMAGE_GREP\n${WHITE}"
+printf "Image exclude grep:\n${YELLOW}$IMAGE_EXCLUDE_GREP\n${WHITE}"
 printf "Images to scan:\n${PURPLE}$IMAGES\n${WHITE}"
 
 # Set initial cumulative count to TOTAL_ISSUES=0

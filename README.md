@@ -41,12 +41,14 @@ jobs:
         run: |
           docker pull python:3.4-alpine
           docker pull python:3.8.10-slim
+          docker pull node:19-alpine # Will be ignored via `image_exclude_grep`
 
       - name: ☢ Scan Images
         uses: spicyparrot/scan-images@trunk
         id: python
         with:
           image_grep: "python"
+          image_exclude_grep: "node"
           severities: "CRITICAL,HIGH"   
 ```
 
@@ -55,6 +57,7 @@ jobs:
 | Input  |  Required | Values  | Default | Description  | 
 |---|---|---|---|---|
 | `image_grep`  | true  | String  |   | String used to grep for all matching images to be scanned e.g. "python"
+| `image_exclude_grep`  | false  | String  |   | String used to ignore images e.g. "node"
 | `severities` | false  | Comma separated list  | 'HIGH,CRITICAL' | List of severities to scan for
 | `upload_reports` | false  | true or false | true  | Option to be able to download html reports
 | `exit_on_error` | false  | true or false  | true | Return an error if any issues are found
