@@ -1,4 +1,4 @@
-name: "Scan Docker Images"
+name: "Oligo - Scan Docker Images"
 description: "Scans multiple docker images based on a search pattern using the Trivy image scanner"
 author: "Craig Bath"
 branding:
