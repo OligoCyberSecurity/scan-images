@@ -25,7 +25,7 @@ TOTAL_FILE=/tmp/totals
 
 # Grep For Images
 ALL_IMAGES=$(docker image list --format "{{.Repository}}:{{.Tag}}")
-IMAGES=$(echo $ALL_IMAGES | grep ${IMAGE_GREP})
+IMAGES=$(docker image list --format "{{.Repository}}:{{.Tag}}"|grep ${IMAGE_GREP})
 printf "All images:\n${PURPLE}$ALL_IMAGES\n${WHITE}"
 printf "Image grep:\n${YELLOW}$IMAGE_GREP\n${WHITE}"
 printf "Images to scan:\n${PURPLE}$IMAGES\n${WHITE}"
