@@ -4,7 +4,7 @@
 IMAGE_GREP=$1
 SEVERITIES=$2
 
-# Variables  
+# Variables
 SECURITY_CHECKS="vuln"      #--security-checks (vuln,config,secret,license) (default [vuln,secret])
 
 # Colours
@@ -16,6 +16,7 @@ WHITE='\033[0m'
 
 # Files
 REPORTS_DIR=/tmp/trivy_reports
+mkdir -p ${REPORTS_DIR}
 HTML_REPORT=${REPORTS_DIR}/trivy_image_reports.html
 TAB_FILE=/tmp/table.txt
 FULL_FILE=/tmp/full.txt
