@@ -2,7 +2,8 @@
 
 # Inputs
 IMAGE_GREP=$1
-SEVERITIES=$2
+IMAGE_EXCLUDE_GREP=$2
+SEVERITIES=$3
 
 # Variables
 SECURITY_CHECKS="vuln"      #--security-checks (vuln,config,secret,license) (default [vuln,secret])
@@ -25,7 +26,7 @@ TOTAL_FILE=/tmp/totals
 
 # Grep For Images
 ALL_IMAGES=$(docker image list --format "{{.Repository}}:{{.Tag}}")
-IMAGES=$(docker image list --format "{{.Repository}}:{{.Tag}}"|grep ${IMAGE_GREP})
+IMAGES=$(docker image list --format "{{.Repository}}:{{.Tag}}"|grep ${IMAGE_GREP}|grep -v ${IMAGE_EXCLUDE_GREP})
 printf "All images:\n${PURPLE}$ALL_IMAGES\n${WHITE}"
 printf "Image grep:\n${YELLOW}$IMAGE_GREP\n${WHITE}"
 printf "Images to scan:\n${PURPLE}$IMAGES\n${WHITE}"

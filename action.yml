@@ -9,6 +9,11 @@ inputs:
     description: "Image grep pattern"
     required: true
 
+  image_exclude_grep:
+    description: "Image grep anti-pattern"
+    required: false
+    default: ''
+
   severities:
     description: "Comma separated list of severities to check for ('CRITICAL,HIGH,MEDIUM,LOW')"
     required: false
@@ -53,7 +58,7 @@ runs:
       shell: bash
       working-directory: temp_scanning
       run: |
-        ./scan.sh "${{ inputs.image_grep }}" "${{ inputs.severities }}"
+        ./scan.sh "${{ inputs.image_grep }}" "${{ inputs.image_exclude_grep  }}" "${{ inputs.severities }}"
         
     - name: ⬆ Upload Reports
       uses: actions/upload-artifact@v3.1.1
