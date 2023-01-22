@@ -24,7 +24,10 @@ SLIM_FILE=/tmp/simple.txt
 TOTAL_FILE=/tmp/totals
 
 # Grep For Images
-IMAGES=$(docker image list --format "{{.Repository}}:{{.Tag}}"|grep ${IMAGE_GREP})
+ALL_IMAGES=$(docker image list --format "{{.Repository}}:{{.Tag}}")
+IMAGES=$(echo $ALL_IMAGES | grep ${IMAGE_GREP})
+printf "All images:\n${PURPLE}$ALL_IMAGES\n${WHITE}"
+printf "Image grep:\n${YELLOW}$IMAGE_GREP\n${WHITE}"
 printf "Images to scan:\n${PURPLE}$IMAGES\n${WHITE}"
 
 # Set initial cumulative count to TOTAL_ISSUES=0
