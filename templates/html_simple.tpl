@@ -20,7 +20,6 @@
         <th>Aqua Vulnerability Database</th>
         <th>Installed Version</th>
         <th>Fixed Version</th>
-        <th>Links</th>
       </tr>
         {{- range .Vulnerabilities }}
       <tr class="severity-{{ escapeXML .Vulnerability.Severity }}">
@@ -33,11 +32,6 @@
         </td>
         <td class="pkg-version">{{ escapeXML .InstalledVersion }}</td>
         <td>{{ escapeXML .FixedVersion }}</td>
-        <td class="links" data-more-links="off">
-          {{- range .Vulnerability.References }}
-          <a href={{ escapeXML . | printf "%q" }}>{{ escapeXML . }}</a>
-          {{- end }}
-        </td>
       </tr>
         {{- end }}
       {{- end }}
