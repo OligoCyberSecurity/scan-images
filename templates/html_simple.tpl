@@ -8,9 +8,9 @@
     <h1>{{- escapeXML ( index . 0 ).Target }}</h1>
     <table>
     {{- range . }}
-      <tr class="group-header"><th colspan="6">{{ .Type | toString | escapeXML }}</th></tr>
+      <tr class="group-header"><th colspan="7">{{ .Type | toString | escapeXML }}</th></tr>
       {{- if (eq (len .Vulnerabilities) 0) }}
-      <tr><th colspan="6">No Vulnerabilities found</th></tr>
+      <tr><th colspan="7">No Vulnerabilities found</th></tr>
       {{- else }}
       <tr class="sub-header">
         <th>Package</th>
@@ -36,7 +36,7 @@
         {{- end }}
       {{- end }}
       {{- if (eq (len .Misconfigurations ) 0) }}
-      <tr><th colspan="6">No Misconfigurations found</th></tr>
+      <tr><th colspan="7">No Misconfigurations found</th></tr>
       {{- else }}
       <tr class="sub-header">
         <th>Type</th>
