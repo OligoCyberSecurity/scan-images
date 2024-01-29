@@ -6,7 +6,7 @@ IMAGE_EXCLUDE_GREP=$2
 SEVERITIES=$3
 
 # Variables
-SECURITY_CHECKS="vuln"      #--security-checks (vuln,config,secret,license) (default [vuln,secret])
+SCANNERS="vuln"      #--scanners (vuln,config,secret,license) (default [vuln,secret])
 
 # Colours
 GREEN='\033[0;32m'
@@ -40,17 +40,17 @@ for IMAGE in $IMAGES; do
   printf "${YELLOW}Scanning ${IMAGE}...\n${WHITE}"
 
   # Full formatted report
-  trivy image --severity ${SEVERITIES} --security-checks ${SECURITY_CHECKS} --timeout 30m --format template --template "@templates/html.tpl" -o ${FULL_FILE} ${IMAGE}
+  trivy image --severity ${SEVERITIES} --scanners ${SCANNERS} --timeout 30m --format template --template "@templates/html.tpl" --output ${FULL_FILE} ${IMAGE}
   echo "" >> ${HTML_REPORT}
   cat ${FULL_FILE}  >> ${HTML_REPORT}
 
   # Reduced report for GitHub Step Summary
-  trivy image --severity ${SEVERITIES} --security-checks ${SECURITY_CHECKS} --timeout 30m --format template --template "@templates/html_simple.tpl" -o ${SLIM_FILE} ${IMAGE}
+  trivy image --severity ${SEVERITIES} --scanners ${SCANNERS} --timeout 30m --format template --template "@templates/html_simple.tpl" --output ${SLIM_FILE} ${IMAGE}
   echo "" >> $GITHUB_STEP_SUMMARY
   cat ${SLIM_FILE}  >> $GITHUB_STEP_SUMMARY
 
   # Add cumulative issues
-  trivy image --severity ${SEVERITIES} --security-checks ${SECURITY_CHECKS} --timeout 30m -o ${TAB_FILE} ${IMAGE}
+  trivy image --severity ${SEVERITIES} --scanners ${SCANNERS} --timeout 30m --output ${TAB_FILE} ${IMAGE}
   ISSUES=$(cat ${TAB_FILE} |grep "Total:"| sed 's/^.*Total: //'|sed 's/ .*//'|xargs -n1|awk '{ sum += $1 } END { print sum }')
   TOTAL_ISSUES=$(expr ${TOTAL_ISSUES} + ${ISSUES})
 
